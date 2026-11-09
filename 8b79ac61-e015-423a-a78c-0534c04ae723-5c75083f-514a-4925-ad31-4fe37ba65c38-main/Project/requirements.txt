@@ -9,8 +9,7 @@ sqlalchemy
 
 pypdf
 chromadb
-torch
-sentence-transformers
+pytest
 
 langgraph
 langgraph-checkpoint-sqlite
