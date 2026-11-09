@@ -1,0 +1,46 @@
+report_reference,report_channel,revision_number,reporter_type,street_name,district,street_category,location_description,location_fixed,defect_type,linked_defect_type,photograph_attached,defect_depth_mm,defect_width_mm,water_depth_mm,water_location,water_reach_m,overhang_location,clear_height_m,on_highway_land,lighting_fault,column_number_given,column_lean_degrees,column_height_m,previous_reports_at_location,planned_crew_hours,supporting_document_count
+SC-52197,StreetCare app,1,Resident,Park Avenue,North,Main route,outside no. 45,true,Flooding or blocked drain,Pothole or road surface,true,4.5 cm,50 cm,6 cm,Road,1.2 m,,,,,,,,0,210 min,2
+52163,Contact centre,1,Resident,Top Road,Villages,LR,opposite no. 81,Y,CW,NIL,N,2 in,18 in,-,-,-,-,-,-,-,-,-,-,0,2.5 hrs,1
+52183,Contact centre,1,Resident,Oakfield Drive,North,LR,opposite no. 34,Y,FW,VG,Y,1.25 in,16 in,-,-,-,PATH,8 ft,Y,-,-,-,-,0,2.5 hrs,2
+52117,Contact centre,1,Resident,Elm Terrace,South,LR,by lamp column 21,Y,FW,NIL,-,0.75 in,12 in,-,-,-,-,-,-,-,-,-,-,1,2 hrs,1
+SC-52158,StreetCare app,1,Resident,Station Road,Town Centre,Main route,outside no. 17,true,Pavement defect,None,true,2 cm,45 cm,,,,,,,,,,,0,150 min,2
+52127,Contact centre,1,Resident,Windmill Lane,North,LR,by lamp column 20,Y,SL,NIL,-,-,-,-,-,-,-,-,-,LEAN,-,caller unsure,20 ft,0,4.5 hrs,1
+SC0052106,Website,1,Resident,Meadow Close,North,Local road,outside no. 45,Yes,Street lighting,No linked defect,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Lamp out,Yes,N/A,N/A,0,2.5,1
+52112,Contact centre,1,Resident,Pond Lane,Villages,LR,outside no. 89,Y,DR,NIL,Y,-,-,2 in,ROAD,3 ft,-,-,-,-,-,-,-,2,4.5 hrs,1
+SC0052114,Website,2,Resident,Kingsley Road,North,Local road,opposite no. 74,Yes,Carriageway,No linked defect,Yes,40,420,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,2.5,2
+SC0052166,Website,1,Resident,Canal Street,South,Local road,by lamp column 21,Yes,Drainage,No linked defect,Yes,N/A,N/A,45,Carriageway,1.8,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,1.5,1
+SC-52155,StreetCare app,1,Resident,Hawthorn Close,North,Residential street,outside no. 41,true,Overhanging tree or hedge,None,,,,,,,Pavement,2.5 m,true,,,,,3,90 min,1
+52174,Contact centre,1,Resident,Moor Lane,Villages,LR,by lamp column 14,Y,VG,NIL,-,-,-,-,-,-,ROAD,16.5 ft,-,-,-,-,-,0,3 hrs,1
+SC-52131,StreetCare app,1,Resident,London Road,South,Main route,opposite no. 110,true,Pothole or road surface,None,true,5.5 cm,14.95 cm,,,,,,,,,,,1,180 min,2
+SC0052147,Website,1,Resident,Victoria Road,South,Traffic sensitive,outside no. 46,Yes,Carriageway,No linked defect,Yes,60,500,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,3,2
+SC-52155,StreetCare app,2,Resident,Hawthorn Close,North,Residential street,outside no. 41,true,Overhanging tree or hedge,None,,,,,,,Pavement,2.2 m,true,,,,,3,90 min,1
+52135,Contact centre,1,Resident,Ferry Lane,South,LR,at the junction with Foundry Lane,Y,DR,NIL,Y,-,-,2.5 in,ROAD,caller unsure,-,-,-,-,-,-,-,0,1.5 hrs,2
+SC0052141,Website,1,Resident,Albert Street,South,Local road,near the park entrance,No,Footway,No linked defect,Yes,35,not known,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1,2,1
+SC-52137,StreetCare app,1,Resident,Cedar Way,North,Residential street,opposite no. 118,true,Overhanging tree or hedge,None,,,,,,,pavement,,false,,,,,0,90 min,1
+SC0052180,Website,1,Resident,Sheep Street,Town Centre,Local road,by lamp column 49,Yes,Street lighting,Vegetation,N/A,N/A,N/A,N/A,N/A,N/A,Footway,2,No,Lamp out,No,N/A,6,0,2,1
+52135,Contact centre,2,Resident,Ferry Lane,South,LR,at the junction with Foundry Lane,Y,DR,NIL,Y,-,-,2.5 in,ROAD,3.3 ft,-,-,-,-,-,-,-,0,1.5 hrs,2
+SC-52133,StreetCare app,1,Resident,Foundry Lane,South,Residential street,near the shops,null,Street light fault,None,,,,,,,,,,Column leaning,true,3.5 deg,6 m,1,270 min,1
+52163,Contact centre,1,Resident,Top Road,Villages,LR,opposite no. 81,Y,CW,NIL,N,2 in,18 in,-,-,-,-,-,-,-,-,-,-,0,2.5 hrs,1
+SC0052166,Website,1,Resident,Canal Street,South,Local road,by lamp column 21,Yes,Drainage,No linked defect,Yes,N/A,N/A,45,Carriageway,1.8,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,1.5,1
+SC-52191,StreetCare app,1,Resident,High Street,Town Centre,Main route,by lamp column 23,true,Street light fault,None,,,,,,,,,,Column leaning,true,7 deg,8.5 m,0,360 min,1
+SC0052102,Website,1,Resident,Holloway Lane,Villages,Local road,outside no. 146,Yes,Vegetation,No linked defect,N/A,N/A,N/A,N/A,N/A,N/A,Carriageway,4.9,Yes,N/A,N/A,N/A,N/A,1,3,1
+SC0052178,Website,1,Resident,Beech Grove,North,Local road,outside no. 125,Yes,Footway,Vegetation,Yes,30,500,N/A,N/A,N/A,Footway,1.9,Yes,N/A,N/A,N/A,N/A,0,2.5,2
+SC0052149,Website,1,Resident,Orchard Rise,North,Local road,outside no. 62,Yes,Vegetation,No linked defect,N/A,N/A,N/A,N/A,N/A,N/A,Footway,2.4,Yes,N/A,N/A,N/A,N/A,1,1.5,1
+52161,Contact centre,1,Resident,Northgate,North,TS,at the junction with Windmill Lane,Y,SL,NIL,-,-,-,-,-,-,-,-,-,OUT,Y,-,33 ft,1,2.5 hrs,1
+52139,Contact centre,1,Resident,Hillside Road,North,-,opposite no. 174,Y,CW,NIL,Y,2.5 in,20 in,-,-,-,-,-,-,-,-,-,-,1,3.5 hrs,2
+SC-52122,StreetCare app,1,Resident,Grange Road,North,Residential street,opposite no. 102,true,pothole or road surface,None,true,6 cm,150 cm,,,,,,,,,,,1,480 min,2
+SC0052114,Website,1,Resident,Kingsley Road,North,Local road,opposite no. 74,Yes,Carriageway,No linked defect,No,40,420,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,2.5,2
+52119,Contact centre,1,Resident,The Green,Villages,LR,by lamp column 17,Y,VG,SL,-,-,-,-,-,-,PATH,7.5 ft,Y,OUT,Y,-,16 ft,1,2.5 hrs,1
+SC0052176,Website,1,Resident,Back Lane,Villages,Local road,outside no. 152,Yes,Carriageway,No linked defect,Yes,70,1510,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1,8,2
+SC-52171,StreetCare app,1,Resident,Riverside Walk,South,Residential street,outside no. 38,true,Flooding or blocked drain,Pavement defect,true,3 cm,60 cm,8 cm,Pavement,,,,,,,,,1,150 min,2
+SC-52125,StreetCare app,1,Resident,Market Place,Town Centre,Main route,opposite no. 50,true,Pavement defect,None,true,1.95 cm,40 cm,,,,,,,,,,,0,150 min,2
+52186,Contact centre,1,Resident,Mill Lane,Town Centre,LR,outside no. 42,Y,CW,DR,Y,1.5 in,14 in,3 in,ROAD,4 ft,-,-,-,-,-,-,-,0,3 hrs,2
+SC0052169,Website,1,Resident,Church Street,Town Centre,Local road,outside no. 1,Yes,Footway,No linked defect,Yes,30,450,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,2,2
+SC0052194,Website,1,Resident,Castle Street,Town Centre,Local road,outside no. 157,Yes,Carriageway,No linked defect,Yes,N/A,300,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,2.5,2
+SC-52128,StreetCare app,1,Resident,Long Lane,Villages,Main route,outside no. 133,true,Overhanging tree or hedge,None,,,,,,,Road,5.1 m,true,,,,,1,210 min,1
+SC0052104,Website,1,Resident,Brook Lane,South,Local road,outside no. 79,Yes,Drainage,No linked defect,Yes,N/A,N/A,50,carriageway,1.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1,1.5,2
+SC-52152,StreetCare app,1,Resident,School Lane,Villages,Residential street,by lamp column 55,true,PAVEMENT DEFECT,None,true,2.5 cm,50 cm,,,,,,,,,,,0,90 min,2
+SC0052115,Website,1,Resident,Wool Lane,Town Centre,Local road,at the junction with King Street,y,Street lighting,No linked defect,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Leaning column,Yes,5,8,0,4.5,1
+52109,Contact centre,1,Resident,Southfield Road,South,LR,at the junction with Albert Street,Y,FW,NIL,Y,1 in,4.75 in,-,-,-,-,-,-,-,-,-,-,0,2 hrs,1
+52189,Contact centre,1,Resident,Willow Crescent,South,LR,opposite no. 97,Y,DR,NIL,Y,-,-,caller unsure,-,4 ft,-,-,-,-,-,-,-,0,1.5 hrs,2
+SC-52144,StreetCare app,1,Resident,Bridge Street,Town Centre,Main route,opposite no. 169,true,Flooding or blocked drain,None,true,,,5.5 cm,Road,2 m,,,,,,,,3,300 min,2

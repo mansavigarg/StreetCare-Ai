@@ -1,0 +1,30 @@
+permit_reference,street_name,works_location,works_promoter,works_description,permit_status
+SWP0071240,Mill Lane,Carriageway,Water company,Water main repair,Live
+SWP0071240,Mill Lane,Carriageway,Water company,Water main repair,Live
+SWP0071246,Mill Lane,Carriageway,Telecoms,Duct repair,Cancelled
+SWP0071255,Victoria Road,Carriageway,Gas network,Gas main replacement,Live
+SWP0071263,STATION ROAD,Carriageway,Gas network,Gas service connection,Live
+SWP0071287, Church Street ,Footway,Telecoms,Fibre installation,Live
+SWP0071301,High Street,Carriageway,Electricity network,Cable fault repair,Live
+SWP0071312,Kingsley Road,Carriageway,Electricity network,New supply connection,Cancelled
+SWP0071320,London Road,Footway,Telecoms,Fibre installation,live
+SWP0071327,London Road,Carriageway,Council contractor,Drainage improvement,Cancelled
+SWP0071334,School Lane,Footway,Water company,Water service connection,CANCELLED
+SWP0071342,Brook Lane,Carriageway,Water company,Leak repair,Cancelled
+SWP0071351,Bridge Street,Footway,Electricity network,Cable fault repair,Live
+SWP0071363, Park Avenue ,Footway,Gas network,Gas service connection,Live
+SWP0071370,Northgate,Carriageway,Water company,Water main repair,Live
+SWP0071384,Market Place,Carriageway,Telecoms,Duct repair,Live
+SWP0071392,Ashby Road,Carriageway,Gas network,Gas main replacement,Live
+SWP0071405,hillside road,Footway,Telecoms,Fibre installation,Live
+SWP0071417,King Street,Carriageway,Water company,Water service connection,Live
+SWP0071426,Southfield Road,Carriageway,Electricity network,New supply connection,Live
+SWP0071438,Albert Street,Carriageway,Gas network,Gas service connection,Live
+SWP0071445,Kiln Lane,Carriageway,Water company,Leak repair,Live
+SWP0071451,Elm Terrace,Carriageway,Telecoms,Duct repair,Live
+SWP0071466,Grange Road,Footway,Council contractor,Kerb replacement,Live
+SWP0071473,Canal Street,Footway,Electricity network,Cable fault repair,Live
+SWP0071489,Foundry Lane,Carriageway,Gas network,Gas main replacement,Live
+SWP0071494,Top Road,Carriageway,Water company,Water main repair,Live
+SWP0071502,Littleworth,Carriageway,Telecoms,Fibre installation,Live
+SWP0071518,Windmill Lane,Carriageway,Council contractor,Drainage improvement,Live
