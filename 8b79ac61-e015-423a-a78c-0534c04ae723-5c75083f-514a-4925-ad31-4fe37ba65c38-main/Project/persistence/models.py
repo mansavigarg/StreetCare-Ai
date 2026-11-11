@@ -104,6 +104,6 @@ class ChatTurn(Base):
     street_name = Column(String, nullable=True)
     defect_type = Column(String, nullable=True)
     answer_text = Column(Text, nullable=False)
-    source_documents = Column(JSON, nullable=False)
+    source_documents = Column(Text, nullable=False)
     closest_distance = Column(Float, nullable=False)
     was_refused = Column(Boolean, nullable=False)
