@@ -17,7 +17,6 @@ myenv/
 
 # Local tools and scratch
 .claude/
-day1_code/
 .vscode/
 .idea/
 
