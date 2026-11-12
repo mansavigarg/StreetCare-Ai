@@ -1,0 +1,58 @@
+{
+  "crew_hours": {
+    "algorithm": "RandomForestRegressor",
+    "held_out_rows": 6337,
+    "minimum_required": 0.86,
+    "scikit_learn_version": "1.9.1",
+    "scores": {
+      "average_estimate_mean_absolute_error": 1.6806,
+      "generalisation_gap": 0.0156,
+      "held_out_r2": 0.9025,
+      "highest_prediction": 21.12,
+      "lowest_prediction": 0.4958,
+      "mean_absolute_error": 0.4158,
+      "train_r2": 0.9181
+    },
+    "training_rows": 25537
+  },
+  "repeat": {
+    "algorithm": "LogisticRegression",
+    "held_out_rows": 7648,
+    "minimum_required": 0.8,
+    "scikit_learn_version": "1.9.1",
+    "scores": {
+      "brier_score": 0.1166,
+      "generalisation_gap": -0.0022,
+      "held_out_roc_auc": 0.8351,
+      "mean_predicted_probability": 0.2017,
+      "positive_share": 0.2035,
+      "train_roc_auc": 0.8329
+    },
+    "training_rows": 30569
+  },
+  "sentence": {
+    "algorithm": "TfidfVectorizer + LogisticRegression",
+    "held_out_rows": 7144,
+    "minimum_required": 0.95,
+    "scikit_learn_version": "1.9.1",
+    "scores": {
+      "accuracy": 0.9766,
+      "generalisation_gap": 0.0029,
+      "held_out_macro_f1": 0.9775,
+      "per_class_f1": {
+        "Background": 0.9828,
+        "Hazard": 0.9657,
+        "Incident": 0.977,
+        "Location": 0.9646,
+        "Measurement": 0.9779,
+        "Photograph": 0.9751,
+        "Previous reports": 0.9842,
+        "Traffic and use": 0.9768,
+        "Weather and water": 0.9936
+      },
+      "train_macro_f1": 0.9804,
+      "weighted_f1": 0.9766
+    },
+    "training_rows": 28573
+  }
+}
