@@ -9,3 +9,4 @@ venv/
 myenv/
 .env
 .env.*
+!.env.example
