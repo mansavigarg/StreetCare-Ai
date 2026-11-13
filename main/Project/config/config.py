@@ -1204,9 +1204,10 @@ PAGE_DETAIL = "Report detail"
 PAGE_DECISION = "Decision queue"
 PAGE_AUDIT = "Audit trail"
 PAGE_CHAT = "Street care chat"
+PAGE_INSIGHTS = "Model insights"
 ROLE_PAGE_ACCESS = {
-    ROLE_HIGHWAYS_INSPECTOR: [PAGE_QUEUE, PAGE_DETAIL, PAGE_DECISION, PAGE_AUDIT, PAGE_CHAT],
-    ROLE_STREET_CARE_COORDINATOR: [PAGE_QUEUE, PAGE_DETAIL, PAGE_AUDIT, PAGE_CHAT],
+    ROLE_HIGHWAYS_INSPECTOR: [PAGE_QUEUE, PAGE_DETAIL, PAGE_DECISION, PAGE_INSIGHTS, PAGE_AUDIT, PAGE_CHAT],
+    ROLE_STREET_CARE_COORDINATOR: [PAGE_QUEUE, PAGE_DETAIL, PAGE_INSIGHTS, PAGE_AUDIT, PAGE_CHAT],
     ROLE_CUSTOMER_SERVICES_ADVISER: [PAGE_CHAT],
 }
 PERMISSION_QUEUE = "queue"
@@ -1224,6 +1225,8 @@ ROLE_PERMISSIONS = {
 PERMISSION_BY_ROUTE = {
     ("GET", "/queue"): PERMISSION_QUEUE,
     ("GET", "/queue/{report_reference}"): PERMISSION_QUEUE,
+    ("GET", "/queue/{report_reference}/explanation"): PERMISSION_QUEUE,
+    ("GET", "/insights"): PERMISSION_QUEUE,
     ("POST", "/reviews"): PERMISSION_REVIEW,
     ("GET", "/reviews"): PERMISSION_AUDIT,
     ("POST", "/reviews/{review_id}/decision"): PERMISSION_DECISION,
@@ -1362,6 +1365,7 @@ PAGE_ICONS = {
     PAGE_DECISION: ":material/gavel:",
     PAGE_AUDIT: ":material/manage_search:",
     PAGE_CHAT: ":material/forum:",
+    PAGE_INSIGHTS: ":material/insights:",
 }
 PAGE_URL_PATHS = {
     PAGE_QUEUE: "report-queue",
@@ -1369,6 +1373,7 @@ PAGE_URL_PATHS = {
     PAGE_DECISION: "decision-queue",
     PAGE_AUDIT: "audit-trail",
     PAGE_CHAT: "street-care-chat",
+    PAGE_INSIGHTS: "model-insights",
 }
 DECISION_BADGE_COLOURS = {DECISION_ORDER: "green", DECISION_INSPECT: "orange",
                           DECISION_REFER: "violet"}
@@ -1391,3 +1396,16 @@ NEUTRAL_BADGE_COLOUR = "gray"
 SENTENCE_TYPE_BADGE_COLOUR = "blue"
 OVERRUN_COLOUR = "red"
 LATENCY_SECONDS_DECIMALS = 1
+
+
+# Explainable predictions (SHAP). Read-only: explanations never change a prediction, a screening or a
+# decision, and they make no language model call.
+EXPLANATION_HISTORY_SAMPLE_ROWS = 400
+EXPLANATION_TOP_FEATURES = 8
+EXPLANATION_REASON_COUNT = 3
+EXPLANATION_DECIMALS = 3
+EXPLANATION_MINIMUM_EFFECT = 0.0005
+EXPLANATION_UNAVAILABLE_MESSAGE = ("Explanations need the shap package: install it with "
+                                   "pip install shap, then restart the service ({reason})")
+EXPLANATION_REPEAT_UNIT = "repeat likelihood"
+EXPLANATION_CREW_HOURS_UNIT = "crew hours"

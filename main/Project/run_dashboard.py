@@ -6,6 +6,7 @@ from config import config
 from dashboard.api_client import call_service
 from dashboard.audit_trail import render_audit_trail_page
 from dashboard.decision_queue import render_decision_queue_page
+from dashboard.model_insights import render_model_insights_page
 from dashboard.report_detail import render_report_detail_page
 from dashboard.report_queue import render_report_queue_page
 from dashboard.sign_in import render_sign_in_page
@@ -14,7 +15,8 @@ from dashboard import ui
 
 PAGE_RENDERERS = {config.PAGE_QUEUE: render_report_queue_page, config.PAGE_DETAIL: render_report_detail_page,
                   config.PAGE_DECISION: render_decision_queue_page, config.PAGE_AUDIT: render_audit_trail_page,
-                  config.PAGE_CHAT: render_street_care_chat_page}
+                  config.PAGE_CHAT: render_street_care_chat_page,
+                  config.PAGE_INSIGHTS: render_model_insights_page}
 
 
 def main():

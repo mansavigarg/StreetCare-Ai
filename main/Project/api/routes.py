@@ -20,6 +20,8 @@ from chat.conversation_memory import recall_conversation
 from chat.record_answer import answer_report_record, answer_street_figure
 from chat.street_care_assistant import answer_from_documents
 from config import config
+from knowledge.standard_reading import read_defect_standard
+from modeling.explainability import build_explainers, explain_report, summarise_queue
 from persistence.database import session_factory
 from persistence.models import AgentRun, ChatTurn, ReportReview, UserAccount
 from persistence.repository import (fetch_chat_turns, fetch_llm_calls, fetch_review_records, fetch_user_account,
@@ -56,6 +58,23 @@ for position, reference in enumerate(rank_report_queue(nodes.open_reports), star
         "overrun_expected": context["crew_hours"]["overrun_expected"],
         "disagreement_count": len(context["disagreements"])})
 report_locks = {reference: threading.Lock() for reference in report_profiles}
+explanation_cache = {}
+
+
+def _prepare_explainers():
+    standards = {kind: read_defect_standard(kind, nodes.knowledge_documents)
+                 for kind in config.DEFECT_STANDARD_DOCUMENTS}
+    return build_explainers(nodes.repeat_model, nodes.crew_hours_model, standards)
+
+
+def _warm_explainers():
+    try:
+        _prepare_explainers()
+    except Exception:  # the endpoints report the problem when they are asked; the service carries on
+        pass
+
+
+threading.Thread(target=_warm_explainers, daemon=True).start()
 public_router = APIRouter()
 guarded_router = APIRouter(dependencies=[Depends(authorize_request)])
 SessionTokenHeader = Annotated[str | None, Header(alias=config.SESSION_TOKEN_HEADER)]
@@ -129,6 +148,33 @@ def get_report_detail(report_reference: str):
     _profile(report_reference)
     status = _report_statuses().get(report_reference, config.REPORT_STATUS_AWAITING_REVIEW)
     return {**report_details[report_reference], "report_status": status}
+
+
+def _explainers_ready():
+    try:
+        _prepare_explainers()
+    except ImportError as error:
+        raise HTTPException(503, config.EXPLANATION_UNAVAILABLE_MESSAGE.format(reason=error))
+
+
+@guarded_router.get("/queue/{report_reference}/explanation")
+def get_report_explanation(report_reference: str):
+    _profile(report_reference)
+    _explainers_ready()
+    if report_reference not in explanation_cache:
+        explanation_cache[report_reference] = explain_report(report_profiles[report_reference],
+                                                             report_details[report_reference]["screening"])
+    return {"report_reference": report_reference, **explanation_cache[report_reference]}
+
+
+@guarded_router.get("/insights")
+def get_model_insights():
+    _explainers_ready()
+    if "queue" not in explanation_cache:
+        explanation_cache["queue"] = summarise_queue(
+            [(row["report_reference"], report_profiles[row["report_reference"]],
+              report_details[row["report_reference"]]["screening"], row) for row in report_queue])
+    return explanation_cache["queue"]
 
 
 @guarded_router.post("/reviews", status_code=201, response_model=ReviewRecordResponse)

@@ -351,3 +351,59 @@ def agent_writeups(review, request=None):
             show(f'<div class="sc-card" style="margin-top:.8rem"><div class="sc-field-label" '
                  f'style="margin-bottom:.4rem;font-weight:600">{e(title)}</div>'
                  f'<p class="sc-prose" style="font-size:.95rem">{e(review[key].strip())}</p></div>')
+
+
+BAR_STYLE = """
+<style>
+.sc-bars { display: flex; flex-direction: column; gap: .15rem; }
+.sc-bar-row { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 3fr) 4.8rem; gap: 1rem;
+  align-items: center; padding: .55rem 0; border-bottom: 1px solid #edf1ee; }
+.sc-bar-row:last-child { border-bottom: 0; }
+.sc-bars.drivers .sc-bar-row { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr) 3rem; }
+.sc-bar-label { color: var(--sc-ink); font-size: .96rem; line-height: 1.35; }
+.sc-bar-track { position: relative; height: 14px; background: #f1f4f2; border-radius: 7px; }
+.sc-bar-track.centred::after { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; width: 1px;
+  background: #b9c4be; }
+.sc-bar-fill { position: absolute; top: 0; bottom: 0; border-radius: 7px; }
+.sc-bar-value { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: .95rem; }
+.sc-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; color: var(--sc-muted); font-size: .86rem; margin-top: .7rem; }
+.sc-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: .35rem; }
+@media (max-width: 700px) { .sc-bar-row { grid-template-columns: minmax(0, 1fr) 4.2rem; }
+  .sc-bar-track { grid-column: 1 / -1; grid-row: 2; } }
+</style>
+"""
+
+BAR_COLOURS = {"up_bad": "#d4544a", "down_good": "#3f8f63", "up_more": "#d98a2b", "down_less": "#3d7fc4",
+               "neutral": "#2f6b5a"}
+
+
+def contribution_bars(items, number_format, up_colour, down_colour, up_text, down_text):
+    """Centred bars, one per feature: to the right when it pushes the figure up, to the left when it pulls it down."""
+    largest = max((abs(item["effect"]) for item in items), default=0) or 1
+    rows = ""
+    for item in items:
+        width = abs(item["effect"]) / largest * 50
+        up = item["effect"] >= 0
+        position = f"left:50%;width:{width:.2f}%" if up else f"left:{50 - width:.2f}%;width:{width:.2f}%"
+        colour = BAR_COLOURS[up_colour if up else down_colour]
+        rows += (f'<div class="sc-bar-row"><div class="sc-bar-label">{e(item["label"])}'
+                 f'<span class="sc-sub">Answer: {e(item["value"])}</span></div>'
+                 f'<div class="sc-bar-track centred"><div class="sc-bar-fill" style="{position};background:{colour}">'
+                 f'</div></div><div class="sc-bar-value" style="color:{colour}">'
+                 f'{"+" if up else "−"}{number_format.format(abs(item["effect"]))}</div></div>')
+    legend = (f'<div class="sc-legend"><span><span class="sc-swatch" style="background:{BAR_COLOURS[up_colour]}">'
+              f'</span>{e(up_text)}</span><span><span class="sc-swatch" style="background:{BAR_COLOURS[down_colour]}">'
+              f'</span>{e(down_text)}</span></div>')
+    show(BAR_STYLE + f'<div class="sc-card"><div class="sc-bars">{rows}</div>{legend}</div>')
+
+
+def driver_bars(drivers, colour="neutral"):
+    """Plain bars for overall drivers: share of the total impact, with how often each pushed up or down."""
+    largest = max((item["share"] for item in drivers), default=0) or 1
+    rows = "".join(
+        f'<div class="sc-bar-row"><div class="sc-bar-label">{e(item["label"])}'
+        f'<span class="sc-sub">Pushes up in {item["pushes_up"]} · pulls down in {item["pulls_down"]}</span></div>'
+        f'<div class="sc-bar-track"><div class="sc-bar-fill" style="left:0;width:{item["share"] / largest * 100:.1f}%;'
+        f'background:{BAR_COLOURS[colour]}"></div></div>'
+        f'<div class="sc-bar-value">{item["share"] * 100:.0f}%</div></div>' for item in drivers)
+    show(BAR_STYLE + f'<div class="sc-card"><div class="sc-bars drivers">{rows}</div></div>')

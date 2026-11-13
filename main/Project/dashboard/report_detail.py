@@ -184,6 +184,28 @@ def _review_tab(detail, review, reference):
             st.rerun()
 
 
+def _why_tab(reference):
+    explanation = call_service("GET", f"/queue/{reference}/explanation",
+                               waiting_message="Working out why the models predicted these figures")
+    repeat, crew = explanation["repeat"], explanation["crew_hours"]
+    top = config.EXPLANATION_TOP_FEATURES
+    ui.show(ui.callout("These explanations come from SHAP values computed on the trained models. They make no "
+                       "language model call and change nothing about the screening, the review or the decision.",
+                       "blue", "help"))
+    ui.section("Why this repeat likelihood",
+               f"A typical past report starts at {repeat['base_value']:.{config.LIKELIHOOD_DECIMALS}f}. This "
+               f"report's answers bring it to {repeat['prediction']:.{config.LIKELIHOOD_DECIMALS}f}. Each bar is "
+               "how much one answer moved it, in likelihood points.")
+    ui.contribution_bars(repeat["contributions"][:top], "{:.3f}", "up_bad", "down_good",
+                         "Makes a repeat report more likely", "Makes a repeat report less likely")
+    ui.section("Why these crew hours",
+               f"A typical past repair takes {crew['base_value']:.{config.CREW_HOURS_DECIMALS}f} crew hours. This "
+               f"report's answers bring it to {crew['prediction']:.{config.CREW_HOURS_DECIMALS}f}. Each bar is how "
+               "many crew hours one answer added or took away.")
+    ui.contribution_bars(crew["contributions"][:top], "{:.2f} h", "up_more", "down_less",
+                         "Adds crew hours", "Takes crew hours away")
+
+
 def render_report_detail_page():
     ui.page_header(config.PAGE_DETAIL, "The screening, statement evidence, form answers and review of one report, "
                                        "before any model call is spent on it.")
@@ -203,13 +225,17 @@ def render_report_detail_page():
                    and record["revision_number"] == revision), None)
     _headline(detail, len(queue))
     st.html('<div style="height:1.2rem"></div>')
-    screening_tab, evidence_tab, report_tab, review_tab = st.tabs(
-        ["Screening", f"Statement evidence  {len(detail['evidence_findings'])}", "Form answers", "Review"])
+    screening_tab, evidence_tab, report_tab, why_tab, review_tab = st.tabs(
+        ["Screening", f"Statement evidence  {len(detail['evidence_findings'])}", "Form answers",
+         "Why this prediction", "Review"], key="report_detail_tabs", on_change="rerun")
     with screening_tab:
         _screening_tab(detail)
     with evidence_tab:
         _evidence_tab(detail)
     with report_tab:
         _report_tab(detail)
+    with why_tab:
+        if why_tab.open:
+            _why_tab(reference)
     with review_tab:
         _review_tab(detail, review, reference)
