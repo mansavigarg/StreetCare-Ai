@@ -1,5 +1,6 @@
 import httpx
 import streamlit as st
+from dotenv import dotenv_values
 
 from config import config
 from dashboard.api_client import call_service
@@ -9,6 +10,7 @@ from dashboard.report_detail import render_report_detail_page
 from dashboard.report_queue import render_report_queue_page
 from dashboard.sign_in import render_sign_in_page
 from dashboard.street_care_chat import render_street_care_chat_page
+from dashboard import ui
 
 PAGE_RENDERERS = {config.PAGE_QUEUE: render_report_queue_page, config.PAGE_DETAIL: render_report_detail_page,
                   config.PAGE_DECISION: render_decision_queue_page, config.PAGE_AUDIT: render_audit_trail_page,
@@ -18,6 +20,7 @@ PAGE_RENDERERS = {config.PAGE_QUEUE: render_report_queue_page, config.PAGE_DETAI
 def main():
     st.set_page_config(page_title=config.DASHBOARD_TITLE, page_icon=config.DASHBOARD_ICON, layout="wide")
     st.markdown(config.DASHBOARD_PAGE_STYLE, unsafe_allow_html=True)
+    ui.inject_styles()
     try:
         httpx.get(config.API_BASE_URL + "/docs", timeout=config.API_REQUEST_TIMEOUT_SECONDS)
     except httpx.HTTPError:
@@ -28,9 +31,14 @@ def main():
     if user is None:
         st.navigation([st.Page(render_sign_in_page, title=config.DASHBOARD_TITLE, icon=config.DASHBOARD_ICON)]).run()
         return
-    st.sidebar.write(f"**{user['display_name']}**")
-    st.sidebar.caption(", ".join(part for part in (user["role"], user["district"]) if part))
-    if st.sidebar.button("Sign out"):
+    model_name = dotenv_values(config.ENV_FILE).get(config.GEMINI_MODEL_VARIABLE) or ""
+    role_line = " · ".join(part for part in (user["role"], user["district"]) if part)
+    st.sidebar.html(f'{ui.brand_block(config.DASHBOARD_TITLE, config.ORGANISATION_NAME)}'
+                    f'<div class="sc-person"><div class="sc-person-name">{ui.e(user["display_name"])}</div>'
+                    f'<div class="sc-person-role">{ui.e(role_line)}</div></div>'
+                    f'<div class="sc-status"><span><span class="sc-dot"></span>Service connected</span>'
+                    f'<span class="sc-mono">{ui.e(model_name)}</span></div>')
+    if st.sidebar.button("Sign out", icon=":material/logout:", width="stretch"):
         call_service("POST", "/auth/signout")
         st.session_state.clear()
         st.rerun()
