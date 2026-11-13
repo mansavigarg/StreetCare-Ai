@@ -60,15 +60,24 @@ def render_decision_queue_page():
     st.session_state["chosen_review"] = review_id
     review = next(item for item in waiting if item["review_id"] == review_id)
     _show_review(review)
+    pending_by = review.get("pending_decided_by")
+    if pending_by and pending_by != user["username"]:
+        st.info(f"{pending_by} has already sent {review['pending_decision']} for this review. "
+                "Only that inspector can finish recording it.")
+        return
     if review["coordinator_id"] == user["username"]:
         st.info("You opened this review, so the other Highways Inspector appointed for the district must decide it")
         return
     pending = st.session_state.get("pending_decision", {})
     pending = pending if pending.get("review_id") == review_id else {}
     options = review["decisions_open"]
+    saved_decision = review.get("pending_decision")
+    saved_reason = review.get("pending_decision_reason")
     with st.form("decision"):
-        decision = st.radio("Decision", options, index=options.index(pending["decision"]) if pending else 0)
-        reason = st.text_area("Reason", value=pending.get("decision_reason", ""),
+        decision = st.radio("Decision", options,
+                            index=options.index(saved_decision or pending.get("decision"))
+                            if saved_decision or pending.get("decision") else 0)
+        reason = st.text_area("Reason", value=saved_reason or pending.get("decision_reason", ""),
                               max_chars=config.DECISION_REASON_MAXIMUM_CHARACTERS)
         if st.form_submit_button("Record the decision"):
             if len(reason.strip()) < config.DECISION_REASON_MINIMUM_CHARACTERS:

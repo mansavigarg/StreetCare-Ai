@@ -132,6 +132,9 @@ class ReviewRecordResponse(BaseModel):
     decided_by_role: str | None
     decided_by_district: str | None
     decision_reason: str | None
+    pending_decision: str | None = None
+    pending_decided_by: str | None = None
+    pending_decision_reason: str | None = None
 
 
 class ReviewCallsResponse(BaseModel):

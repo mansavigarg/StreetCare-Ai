@@ -152,7 +152,16 @@ def start_report_review(review_request: ReviewRequest, signed_in_user: SignedInU
 @guarded_router.get("/reviews", response_model=list[ReviewRecordResponse])
 def list_report_reviews(status_value: Annotated[list[ReviewStatusValue], Query()]):
     with session_factory() as session:
-        return fetch_review_records(session, ReportReview.status.in_(status_value))
+        records = fetch_review_records(session, ReportReview.status.in_(status_value))
+    for record in records:
+        if record["status"] != config.REVIEW_STATUS_AWAITING:
+            continue
+        snapshot = _checkpoint(record)
+        pending = snapshot.values.get("review_decision")
+        if pending is not None:
+            record.update(pending_decision=pending["decision"], pending_decided_by=pending["decided_by"],
+                         pending_decision_reason=pending["decision_reason"])
+    return records
 
 
 @guarded_router.post("/reviews/{review_id}/decision", response_model=ReviewRecordResponse)
